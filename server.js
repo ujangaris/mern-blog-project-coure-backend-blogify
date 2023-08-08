@@ -6,6 +6,9 @@ require("./config/database")();
 // !Server
 const app = express();
 
+// middlewares
+app.use(express.json()); //Pass incoming data
+
 // Routes
 app.use("/", usersRouter);
 

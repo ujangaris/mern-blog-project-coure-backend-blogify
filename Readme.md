@@ -41,3 +41,31 @@
         - copy connection string yang ada pada file config/database
           lalu enter, jika ada notif mongodb connecting successfully
           tanda nya mongo db berhasil di connect dengan vscode.
+
+### User Registration
+
+    Todo:
+    1.  controllers/users/usersController.js
+        - import dan pasang User model
+        - get the details
+        - Check if user exists
+        - Register new user
+        - save
+        - cetak response success dan gagal
+    2.  server.js
+        - middlewares
+          ini berfungsi untuk memberi memastikan bahwa data JSON yang masuk dalam body
+          permintaan akan di-parse dan diubah menjadi objek JavaScript yang dapat diakses melalui req.body
+    3.  model/User.js
+        - ubah required isVerified menjadi false
+    4.  jalankan server:
+        - npm run server
+    5.  pengujian pada postman:
+        - POST http://localhost:9080/api/v1/users/register
+        body -> row -> json:
+            {
+                "username":"aris",
+                "email":"aris@gmail.com",
+                "password":"12345"
+            }
+        - jika berhasil , response akan menampilkan data dan status (201)
