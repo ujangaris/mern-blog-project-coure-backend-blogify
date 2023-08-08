@@ -28,3 +28,16 @@
         - npm start
         - jika ada text pada terminal : DB has been connected
         - menandakan setup yang kita lakukan berhasil
+
+### Installing Nodemon & VSCODE MongoDB Extension
+
+    Todo:
+    1.  install Nodemon
+        - npm i nodemon -D
+    2.  pasang extension MongoDB pada VSCODE
+        - pada extension vscode cari MongoDB for VS Code
+          kemudian install
+        - nanti ada logo daun , kemudian klik lalu klik connect
+        - copy connection string yang ada pada file config/database
+          lalu enter, jika ada notif mongodb connecting successfully
+          tanda nya mongo db berhasil di connect dengan vscode.
