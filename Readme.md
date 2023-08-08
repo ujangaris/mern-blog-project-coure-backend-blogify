@@ -25,3 +25,10 @@
     3.  jalankan server
         - npm start
         - lihat pada terminal: Server is running on port 9080
+
+## Bagian 6: Data Modelling Backend
+
+### User Data modelling
+
+    Todo:
+    1.  model/User/User.js
