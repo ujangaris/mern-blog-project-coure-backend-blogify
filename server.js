@@ -1,10 +1,14 @@
 const http = require("http");
 const express = require("express");
+const usersRouter = require("./routes/Users/usersRouter");
 
 // !Server
 const app = express();
 
-const server = http.createServer();
+// Routes
+app.use("/", usersRouter);
+
+const server = http.createServer(app);
 //? Start the server
 
 const PORT = process.env.PORT || 9080;

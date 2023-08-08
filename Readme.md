@@ -1,19 +1,16 @@
 # BACKEND blogify
 
-## Bagian 6: Data Modelling Backend
+## Bagian 7: Authentication & Authorisation Backend
 
-### User Data modelling
-
-    Todo:
-    1.  model/User/User.js
-
-### Post Data modelling
+### Dummy User Registration Controller
 
     Todo:
-    1.  model/Post/Post.js
-
-### Category & Comment Data modelling
-
-    Todo:
-    1.  model/Category/Category.js
-    2.  model/Comment/Comment.js
+    1.  controllers/users/usersController.js
+    2.  routes/users/usersRouter.js
+    3.  server.js
+    4.  pengujian dengan postman:
+        - POST http://localhost:9080/api/v1/users/register
+        - klik send, hasil response:
+            {
+                "message": "user registration controller"
+            }
