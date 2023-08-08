@@ -1,6 +1,6 @@
 # BACKEND blogify
 
-## Setup Folder Structure
+### Setup Folder Structure
 
     Todo:
     1.  Folder
@@ -15,7 +15,7 @@
         - .gitignore
         - server.js
 
-## Create express server
+### Create express server
 
     Todo:
     1.  Setup package.json
