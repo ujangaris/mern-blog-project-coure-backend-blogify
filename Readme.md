@@ -192,3 +192,19 @@
                 "data": "user data"
             }
         - pada terminal akan ada message isLoggin middleware
+
+### Get token from Request Header
+
+    Todo:
+    1.  middlewares/isLoggin.js
+        - implementasi untuk mengambil nilai token dari headers
+    2.  pengujian pada postman:
+        - GET http://localhost:9080/api/v1/users/profile/<isi sembarang huruf/angka>
+
+        - jika berhasil , response akan menampilkan data dan status "success":
+            {
+                "status": "success",
+                "message": "Profile fetched",
+                "data": "user data"
+            }
+        - pada terminal akan ada token yang tampil
