@@ -230,3 +230,32 @@
                 iat: 1691575926,
                 exp: 1691611926
             }
+
+### Save User into Request Object
+
+    Todo:
+    1.  middlewares/isLoggin.js
+        - import dan pasang user model
+        - get the user id
+        - dengan select tampilkan data user yang ingin ditampilkan
+        - save user into req obj
+    2.  controllers/users/usersController.js
+        - cetak response yangg tampil pada consol.log
+        - console.log(req.userAuth);
+          userAuth ini dipanggil dari isLoggin
+    3.  pengujian pada postman:
+        - GET http://localhost:9080/api/v1/users/profile/<isi sembarang huruf/angka>
+
+        - jika berhasil , response akan menampilkan data dan status "success":
+            {
+                "status": "success",
+                "message": "Profile fetched",
+                "data": "user data"
+            }
+        - pada terminal akan  tampil:
+            {
+                _id: new ObjectId("64d346f07777a0c05b525563"),
+                username: 'test2',
+                email: 'test@gmail.com',
+                role: 'user'
+            }
