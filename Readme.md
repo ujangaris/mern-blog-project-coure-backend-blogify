@@ -259,3 +259,18 @@
                 email: 'test@gmail.com',
                 role: 'user'
             }
+
+### Get User Profile Controller Improved (tampilkan data user berdasarkan id)
+
+    Todo:
+
+    1.  controllers/users/usersController.js
+        - get user id from params
+        - console.log(req.userAuth);
+          userAuth ini dipanggil dari isLoggin
+    2.  pengujian pada postman:
+        - GET http://localhost:9080/api/v1/users/profile/<isi sembarang huruf/angka>
+
+        - jika berhasil , response akan menampilkan data dan status "success":
+        - sluruh data user tampil sama dengan yang di terminal
+        - pada terminal data user akan  tampil

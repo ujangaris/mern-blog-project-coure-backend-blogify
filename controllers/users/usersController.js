@@ -89,12 +89,18 @@ exports.login = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   // cetak response yangg tampil pada consol.log
-  console.log(req.userAuth);
+  // console.log(req.userAuth);
+  // console.log(req.params);
   try {
+    // ! get user id from params
+    const id = req.params.id;
+    const user = await User.findById(id);
+    console.log(user);
     res.json({
       status: "success",
       message: "Profile fetched",
       data: "user data",
+      user,
     });
   } catch (error) {
     res.json({
