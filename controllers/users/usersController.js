@@ -87,10 +87,13 @@ exports.login = async (req, res) => {
 // @route Post /api/v1/users/profile/:id
 // @access Private
 
-exports.getProfile = async (req, res) => {
+exports.getProfile = async (req, res, next) => {
   // cetak response yangg tampil pada consol.log
   // console.log(req.userAuth);
   // console.log(req.params);
+  // triger custom
+  const myErr = new Error("my custom error");
+  return next(myErr);
   try {
     // ! get user id from params
     // const id = req.params.id;

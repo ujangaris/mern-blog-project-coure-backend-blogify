@@ -289,3 +289,24 @@
         - sluruh data user tampil
         - pada kasus ini harusnya response error,
         - akan kita handle pada step berikutnya!
+
+## Bagian 8: Error Handling Backend
+
+### Global Error Handler Middleware
+
+    Todo:
+
+    1.  controllers/users/usersController.js
+        - triger custom
+        - tambahkan next pada properti async
+    2.  server.js
+        - Error Middleware
+    3.  pengujian pada postman:(kosongkan nilai dari id)
+        - GET http://localhost:9080/api/v1/users/profile/
+        - status, message, stack
+        - hasil response akan menampilkan custome error yang kita buat:
+        {
+            "status": "failed",
+            "message": "my custom error",
+            "stack": "Error: my custom error\n    at exports.getProfile (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\controllers\\users\\usersController.js:95:17)\n    at Layer.handle [as handle_request] (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\middlewares\\isLoggin.js:24:7\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
+        }
