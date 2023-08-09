@@ -95,3 +95,27 @@
             }
         - jika berhasil , response akan menampilkan data dan status (201)
         - dapat dilihat password asli tidak tampil, namun akan tampil random string, number, atau special character
+
+### Login User
+
+    Todo:
+    1.  controllers/users/usersController.js
+        - Login user
+        - get teh login details
+        - Check if exists
+        - compare the hashed password with the one the request
+        - Update  the last login
+        - save user untuk perubahan lastLogin
+    2.  routes/users/usersRouter.js
+        - Login
+        - import dan pasang login controller
+
+    4.  pengujian pada postman:
+        - POST http://localhost:9080/api/v1/users/login
+        body -> row -> json:
+            {
+                "username":"aris2",
+                "password": "12345",
+            }
+        - jika berhasil , response akan menampilkan data dan status "success"
+        - namun pada bagian ini status dari response belum ditangani, jd status masih bernilai 200(ok)
