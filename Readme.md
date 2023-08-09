@@ -266,11 +266,26 @@
 
     1.  controllers/users/usersController.js
         - get user id from params
-        - console.log(req.userAuth);
-          userAuth ini dipanggil dari isLoggin
     2.  pengujian pada postman:
-        - GET http://localhost:9080/api/v1/users/profile/<isi sembarang huruf/angka>
+        - GET http://localhost:9080/api/v1/users/profile/<isi id user yang login>
 
         - jika berhasil , response akan menampilkan data dan status "success":
         - sluruh data user tampil sama dengan yang di terminal
         - pada terminal data user akan  tampil
+
+### Get User Profile Controller Improved 2 (tampilkan data user tanpa id)
+
+    Todo:
+
+    1.  controllers/users/usersController.js
+        - get user id from params
+        - console.log(req.userAuth._id);
+    2.  routes/users/usersRouter.js
+        - kosongkan nilai dari id
+    3.  pengujian pada postman:(kosongkan nilai dari id)
+        - GET http://localhost:9080/api/v1/users/profile/
+
+        - harusnya error namun , response akan menampilkan data dan status "success":
+        - sluruh data user tampil
+        - pada kasus ini harusnya response error,
+        - akan kita handle pada step berikutnya!

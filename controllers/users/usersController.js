@@ -93,7 +93,8 @@ exports.getProfile = async (req, res) => {
   // console.log(req.params);
   try {
     // ! get user id from params
-    const id = req.params.id;
+    // const id = req.params.id;
+    const id = req.userAuth._id;
     const user = await User.findById(id);
     console.log(user);
     res.json({
