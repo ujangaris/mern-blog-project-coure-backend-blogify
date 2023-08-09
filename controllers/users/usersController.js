@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../../model/User/User");
+const generateToken = require("../../utils/generateToken");
 // @desc Register a new user
 // @route Post /api/v1/users/register
 // @access Public
@@ -68,7 +69,11 @@ exports.login = async (req, res) => {
     await user.save();
     res.json({
       status: "success",
-      user,
+      _id: user?._id,
+      email: user?.email,
+      username: user?.username,
+      role: user?.role,
+      token: generateToken(user),
     });
   } catch (error) {
     res.json({

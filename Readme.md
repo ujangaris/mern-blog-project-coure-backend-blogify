@@ -119,3 +119,34 @@
             }
         - jika berhasil , response akan menampilkan data dan status "success"
         - namun pada bagian ini status dari response belum ditangani, jd status masih bernilai 200(ok)
+
+### Generate Token
+
+    Todo:
+    1.  install jsonwebtoken
+        - npm i jsonwebtoken
+    2.  utils/generateToken.js
+        - import dan pasang jwtwebtoken
+        - create payload for the user
+        - sign the token with  a secret key
+        - export generateToken
+    3.  controllers/users/usersController.js
+        - import dan pasang generateToken
+        - haspus user & tampilkan response yang ingin ditampilkan saja
+    4.  pengujian pada postman:
+        - POST http://localhost:9080/api/v1/users/login
+        body -> row -> json:
+            {
+                "username":"aris2",
+                "password": "12345",
+            }
+        - jika berhasil , response akan menampilkan data dan status "success":
+            {
+                "status": "success",
+                "_id": "64d346f07777a0c05b525563",
+                "email": "aris2@gmail.com",
+                "username": "aris2",
+                "role": "user",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkMzQ2ZjA3Nzc3YTBjMDViNTI1NTYzIn0sImlhdCI6MTY5MTU3NDAzNywiZXhwIjoxNjkxNjEwMDM3fQ.XFLwTEdbHlCdtDSIqjl6P3CD9OAjqXDEFRHBT6B556s"
+            }
+        - namun pada bagian ini status dari response belum ditangani, jd status masih bernilai 200(ok)
