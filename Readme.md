@@ -69,3 +69,29 @@
                 "password":"12345"
             }
         - jika berhasil , response akan menampilkan data dan status (201)
+
+### Has User Password
+
+    Todo:
+    1.  Install bcryptjs
+        - npm i bcryptjs
+    2.  controllers/users/usersController.js
+        - import dan pasang bcrypt
+          ini berfungsi untuk memperkuat keamanan password pengguna,
+          jadi password pengguna tidak terlihat langsung, namun di acak dengan algoritma hash bcrypt.
+        - has password
+    3.  config/database.js
+        - ubah connection string ke local mongodb database
+        - ubah juga connection pada vscodenya!
+        - untuk lebih yakin nyalakan mongodb compas dan liat isi database mern-blog
+          akan ada databa yang kita registrasikan.
+    4.  pengujian pada postman:
+        - POST http://localhost:9080/api/v1/users/register
+        body -> row -> json:
+            {
+                "username":"aris2",
+                "email":"aris@gmail.com",
+                "password": "$2a$10$7tZlqJg/7cb.cHBKjdt/8eYF4kJfeKwCv0iU3WxuixVCR3be21GMe",
+            }
+        - jika berhasil , response akan menampilkan data dan status (201)
+        - dapat dilihat password asli tidak tampil, namun akan tampil random string, number, atau special character
