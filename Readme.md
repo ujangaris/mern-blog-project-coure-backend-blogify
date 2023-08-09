@@ -208,3 +208,25 @@
                 "data": "user data"
             }
         - pada terminal akan ada token yang tampil
+
+### Verify Token
+
+    Todo:
+    1.  middlewares/isLoggin.js
+        - import dan pasang jsonwebtoken
+        - implementation Verify the token
+    2.  pengujian pada postman:
+        - GET http://localhost:9080/api/v1/users/profile/<isi sembarang huruf/angka>
+
+        - jika berhasil , response akan menampilkan data dan status "success":
+            {
+                "status": "success",
+                "message": "Profile fetched",
+                "data": "user data"
+            }
+        - pada terminal akan  tampil:
+            {
+                user: { id: '64d346f07777a0c05b525563' },
+                iat: 1691575926,
+                exp: 1691611926
+            }
