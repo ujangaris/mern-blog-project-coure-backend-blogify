@@ -173,3 +173,22 @@
                 "data": "user data"
             }
         - namun pada bagian ini status dari response belum ditangani, jd status masih bernilai 200(ok)
+
+### is Login Middleware Logic Implementation
+
+    Todo:
+    1.  middlewares/isLoggin.js
+        - implementasi dengan next()
+          next berfungsi ketika code dijalankan masuk kethap berikutnya, agar tidak load lama.
+    2.  routes/users/usersRouter.js
+        - import dan pasang isLoggin
+    3.  pengujian pada postman:
+        - GET http://localhost:9080/api/v1/users/profile/<isi sembarang huruf/angka>
+
+        - jika berhasil , response akan menampilkan data dan status "success":
+            {
+                "status": "success",
+                "message": "Profile fetched",
+                "data": "user data"
+            }
+        - pada terminal akan ada message isLoggin middleware
