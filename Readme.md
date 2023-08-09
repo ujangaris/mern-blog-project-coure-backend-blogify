@@ -150,3 +150,26 @@
                 "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkMzQ2ZjA3Nzc3YTBjMDViNTI1NTYzIn0sImlhdCI6MTY5MTU3NDAzNywiZXhwIjoxNjkxNjEwMDM3fQ.XFLwTEdbHlCdtDSIqjl6P3CD9OAjqXDEFRHBT6B556s"
             }
         - namun pada bagian ini status dari response belum ditangani, jd status masih bernilai 200(ok)
+
+### Dummy Profile Controller
+
+    Todo:
+    1.  controllers/users/usersController.js
+        - Get profile
+        - hanya menampilkan pesan Profile fetched
+    2.  routes/users/usersRouter.js
+        - import dan pasang getProfile
+        - buat route profile
+        - agar lebih rapih ubah base_url pindahkan ke server.js
+    3.  server.js
+        - hanya merubah base_url
+    4.  pengujian pada postman:
+        - GET http://localhost:9080/api/v1/users/profile/<isi sembarang huruf/angka>
+
+        - jika berhasil , response akan menampilkan data dan status "success":
+            {
+                "status": "success",
+                "message": "Profile fetched",
+                "data": "user data"
+            }
+        - namun pada bagian ini status dari response belum ditangani, jd status masih bernilai 200(ok)

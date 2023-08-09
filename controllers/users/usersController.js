@@ -82,3 +82,22 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+// @desc Get profile
+// @route Post /api/v1/users/profile/:id
+// @access Private
+
+exports.getProfile = async (req, res) => {
+  try {
+    res.json({
+      status: "success",
+      message: "Profile fetched",
+      data: "user data",
+    });
+  } catch (error) {
+    res.json({
+      status: "success",
+      message: error?.message,
+    });
+  }
+};
