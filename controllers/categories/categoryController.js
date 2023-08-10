@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Category = require("../../model/Category/Category");
 // @desc Create a new category
-// @route Post /api/v1/categories
+// @route POST /api/v1/categories
 // @access Private
 
 exports.createCategory = asyncHandler(async (req, res) => {
@@ -23,7 +23,7 @@ exports.createCategory = asyncHandler(async (req, res) => {
 });
 
 // @desc Get all category
-// @route Get /api/v1/categories
+// @route GET /api/v1/categories
 // @access Public
 
 exports.getCategories = asyncHandler(async (req, res) => {
@@ -33,5 +33,41 @@ exports.getCategories = asyncHandler(async (req, res) => {
     status: "success",
     message: "Categories successfully fetched",
     categories,
+  });
+});
+
+// @desc Delete category
+// @route DELETE /api/v1/categories/:id
+// @access Private
+
+exports.deleteCategory = asyncHandler(async (req, res) => {
+  await Category.findByIdAndDelete(req.params.id);
+
+  res.status(200).json({
+    status: "success",
+    message: "Categories successfully deleted",
+  });
+});
+
+// @desc Update category
+// @route PUT /api/v1/categories/:id
+// @access Private
+
+exports.updateCategory = asyncHandler(async (req, res) => {
+  const category = await Category.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.name,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
+    status: "success",
+    message: "Categories successfully deleted",
+    category,
   });
 });

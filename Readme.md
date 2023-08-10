@@ -77,3 +77,52 @@
         -GET http://localhost:9080/api/v1/categories
         - hasil response:
             semua data category akan tampil
+
+### Delete and Update Category
+
+    Todo:
+    1.  controllers/categories/categoryController.js
+        - deleteCategory()
+          duplikat code dari createCategory kemudian modifikasi, rubah juga response statusnya menjadi 200
+        - findByIdAndDelete(req.params.id)
+
+        - updateCategory()
+          duplikat code dari createCategory kemudian modifikasi, rubah juga response statusnya menjadi 200
+        - findByIdAndUpdate(req.params.id)
+    2.  routes/category/categoryRouter.js
+        - update category
+            - import dan pasang updateCategory
+            - pasang juga isLoggin
+            - method put dan tambahkan parameter :id
+        - delete category
+            - import dan pasang deleteCategory
+            - pasang juga isLoggin
+            - method delete dan tambahkan parameter :id
+    3.  pengujian pada postman:
+        - login dulu dan copy access_token, kemudian  pada Authorization, pilih bearer token lalu pastekan access_token
+        -PUT http://localhost:9080/api/v1/categories/<id dari category>
+        body -> row -> json:
+        {
+            "name":"NodeJS & Express"
+        }
+        - hasil response:
+            {
+                "status": "success",
+                "message": "Categories successfully deleted",
+                "category": {
+                    "_id": "64d49b1ad07a62ad8e4de618",
+                    "name": "NodeJS & Express",
+                    "author": "64d346f07777a0c05b525563",
+                    "shares": 0,
+                    "createdAt": "2023-08-10T08:08:58.655Z",
+                    "updatedAt": "2023-08-10T08:53:23.943Z",
+                    "__v": 0
+                }
+            }
+
+        -DELETE http://localhost:9080/api/v1/categories/<id dari category>
+        - hasil response:
+            {
+                "status": "success",
+                "message": "Categories successfully deleted"
+            }
