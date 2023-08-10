@@ -297,6 +297,7 @@
     Todo:
 
     1.  controllers/users/usersController.js
+        - getProfile
         - triger custom
         - tambahkan next pada properti async
     2.  server.js
@@ -309,4 +310,31 @@
             "status": "failed",
             "message": "my custom error",
             "stack": "Error: my custom error\n    at exports.getProfile (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\controllers\\users\\usersController.js:95:17)\n    at Layer.handle [as handle_request] (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\middlewares\\isLoggin.js:24:7\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
+        }
+
+### Catch Async Errors
+
+    Todo:
+
+    1.  install express async hanlder
+        - npm i express-async-handler
+    2.  controllers/users/usersController.js
+        - import dan pasang express async handler
+        - hapus try catch dan bungkus code dari callback function async sampai breket penutup code
+          dengan asyncHandler lakukan pada register, login & getProfile
+    3.  pengujian pada postman:
+        - POST http://localhost:9080/api/v1/users/register
+        - send data dengan user yang sudah terdaftar agar bisa menampilkan pesan erroronya:
+        body -> row -> json:
+            {
+                "username":"aris",
+                "email":"aris@gmail.com",
+                "password":"12345"
+            }
+        - status, message, stack
+        - hasil response akan menampilkan  errodengan asyncHandler :
+        {
+            "status": "failed",
+            "message": "User aris already exists",
+            "stack": "Error: User aris already exists\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\controllers\\users\\usersController.js:18:11\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
         }
