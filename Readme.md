@@ -62,3 +62,18 @@
                 "message": "token expired/Invalid",
                 "stack": "Error: token expired/Invalid\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\middlewares\\isLoggin.js:20:19\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
             }
+
+### Fetch All Categories
+
+    Todo:
+    1.  controllers/categories/categoryController.js
+        - getCategories()
+          duplikat code dari createCategory kemudian modifikasi, rubah juga response statusnya menjadi 200
+    2.  routes/category/categoryRouter.js
+        - all category
+          karna public tidak perlu menggunakan middleware dari isLoggin
+    3.  pengujian pada postman:
+        - login dan tidak login bisaa access enpoint ini
+        -GET http://localhost:9080/api/v1/categories
+        - hasil response:
+            semua data category akan tampil
