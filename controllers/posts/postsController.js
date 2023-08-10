@@ -62,3 +62,16 @@ exports.getPosts = asyncHandler(async (req, res) => {
     posts,
   });
 });
+// @desc Get single post
+// @route GET /api/v1/posts/:id
+// @access Public
+
+exports.getPost = asyncHandler(async (req, res) => {
+  const post = await Post.findById(req.params.id);
+
+  res.status(200).json({
+    status: "success",
+    message: "Post successfully fetched",
+    post,
+  });
+});

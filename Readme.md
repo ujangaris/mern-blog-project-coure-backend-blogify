@@ -88,11 +88,21 @@
         - send the response succes(200)
     2.  routes/post/postsRouter.js
         - import dan pasang getPosts dari postsController
-        - import dan pasang isLoggin
     3.  pengujian pada postman:
-        - Login dulu
-            POST http://localhost:9080/api/v1/users/login
         - POST http://localhost:9080/api/v1/posts
-            Authorization: Bearer Token, kemudian pastekan access_token setelah login
+        - hasil response:
+            akan menampilkan semua data post
+
+### Get single Post Controller
+
+    Todo:
+    1.  controllers/posts/postsController.js
+        - getPost
+        - send the response succes(200)
+    2.  routes/post/postsRouter.js
+        - import dan pasang getPost dari postsController
+    3.  pengujian pada postman:
+
+        - POST http://localhost:9080/api/v1/posts/<id post>
         - hasil response:
             akan menampilkan semua data post
