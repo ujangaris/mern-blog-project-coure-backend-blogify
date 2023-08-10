@@ -42,9 +42,23 @@ exports.createPost = asyncHandler(async (req, res) => {
     }
   );
   // ? send the response
-  res.json({
+  res.status(201).json({
     status: "success",
     message: "Post Successfully Created",
     post,
+  });
+});
+
+// @desc Get all posts
+// @route GET /api/v1/posts
+// @access Public
+
+exports.getPosts = asyncHandler(async (req, res) => {
+  const posts = await Post.find({});
+
+  res.status(200).json({
+    status: "success",
+    message: "Posts successfully fetched",
+    posts,
   });
 });
