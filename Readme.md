@@ -126,3 +126,30 @@
                 "status": "success",
                 "message": "Categories successfully deleted"
             }
+
+## Bagian 10: Postman Confirguration Backend
+
+### Environment Variables in NodeJs(dotenv)
+
+    Todo:
+    1.  install dotenv
+        - npm i dotenv
+    2.  server.js
+        - import dan pasang dotenv
+    3.  .env
+        - MOGO_URL=mongodb://localhost:27017/mern-blog
+        - JWT_KEY=<isi dengan token yang diiginkan>
+    4.  config/database.js
+        - panggil nama database yang sudah di deklarasikan pada file .env
+          pada kasus ini:  MOGO_URL
+    5.  utils/generateToken.js
+        - panggil nama key yang sudah di deklarasikan pada file .env
+          pada kasus ini:  JWT_KEY
+    6.  middlewares/isLoggin.js
+        - panggil nama key yang sudah di deklarasikan pada file .env
+          pada kasus ini:  JWT_KEY
+
+    7.  pengujian pada postman:
+        - login dulu dan copy access_token, kemudian  pada Authorization, pilih bearer token lalu pastekan access_token
+        - coba semua endpoint
+        - harusnya semua akan berjalan tanpa masalah.

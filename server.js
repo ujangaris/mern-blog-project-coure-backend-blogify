@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const http = require("http");
 const express = require("express");
 const usersRouter = require("./routes/Users/usersRouter");
@@ -10,6 +12,7 @@ require("./config/database")();
 
 // !Server
 const app = express();
+console.log(process.env.MYKEY);
 
 // middlewares
 app.use(express.json()); //Pass incoming data

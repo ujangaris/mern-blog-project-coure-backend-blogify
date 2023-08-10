@@ -5,7 +5,7 @@ const connectDB = async () => {
   try {
     await mongoose.connect(
       // "mongodb+srv://ujangaja:ujang123@mern-blog-v1.pga3tix.mongodb.net/mern-blog?retryWrites=true&w=majority"
-      "mongodb://localhost:27017/mern-blog"
+      process.env.MOGO_URL
     );
     console.log("DB has been connected");
   } catch (error) {
