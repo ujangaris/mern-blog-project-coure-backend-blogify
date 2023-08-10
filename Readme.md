@@ -356,3 +356,26 @@
             "message": "Cannot find  /api/v1/users/login/dsadsa on the server",
             "stack": "Error: Cannot find  /api/v1/users/login/dsadsa on the server\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\server.js:16:15\n    at Layer.handle [as handle_request] (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:47:12)"
         }
+
+### Refactored Error Handlers
+
+    Todo:
+
+    1.  middleware/globalErrorHandler.js
+        - globalErrorHandler
+        - notFound
+        - export globalErrorHandler & notFound
+    2.  server.js
+        - modifikasi code Not Found middleware & Error Middleware
+        - import dan pasang globalErrorHandler & notFound
+    3.  pengujian pada postman:
+        - POST http://localhost:9080/api/v1/users/register/<isi dengan apas saja>
+        - POST http://localhost:9080/api/v1/users/login/<isi dengan apas saja>
+        - GET http://localhost:9080/api/v1/users/profile/<isi dengan id yang tidak terfaftar>
+        - coba satu2 request endpoint diatas, kemudian send
+        - hasil response akan menampilkan  error dengan globalErrorHandler & notFond :
+        {
+            "status": "failed",
+            "message": "Cannot find  /api/v1/users/login/dsadsa on the server",
+            "stack": "Error: Cannot find  /api/v1/users/login/dsadsa on the server\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\server.js:16:15\n    at Layer.handle [as handle_request] (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:646:15\n    at next (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:265:14)\n    at Function.handle (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (D:\\BELAJAR\\REACTJS\\UDEMY\\blogify\\api\\node_modules\\express\\lib\\router\\index.js:47:12)"
+        }
