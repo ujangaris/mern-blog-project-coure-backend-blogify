@@ -105,4 +105,44 @@
 
         - POST http://localhost:9080/api/v1/posts/<id post>
         - hasil response:
-            akan menampilkan semua data post
+            akan menampilkan satu data post
+
+### Update & Delete Post Controller
+
+    Todo:
+    1.  controllers/posts/postsController.js
+        - updatePost
+        - asyncHandler()
+        - findByIdAndUpdate()
+        - send the response succes(200)
+
+        - deletePost
+        - asyncHandler()
+        - findByIdAndDelete()
+        - send the response succes(200)
+
+    2.  routes/post/postsRouter.js
+        - import dan pasang updatePost dari postsController
+          Methods: put('/:id)
+          isLoggin
+        - import dan pasang deletePost dari postsController
+          Methods: delete('/:id)
+          isLoggin
+    3.  pengujian pada postman:
+        - login terlebih dulu dengan user terdaftar
+             POST http://localhost:9080/api/v1/users/login
+        - masuk ke get all post
+            POST http://localhost:9080/api/v1/posts
+            - copy id dari salah satu post
+        - update post
+            PUT http://localhost:9080/api/v1/posts/<id post>
+            Authorization: Bearer Token, kemudian pastekan access_token setelah login
+            body :{
+                    "title":"NodeJs",
+                  }
+        - hasil response: success(200)
+
+        - delete post
+            DELETE http://localhost:9080/api/v1/posts/<id post>
+        - hasil response: success(200)
+            data akan terhapus

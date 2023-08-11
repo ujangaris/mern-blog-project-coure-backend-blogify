@@ -75,3 +75,33 @@ exports.getPost = asyncHandler(async (req, res) => {
     post,
   });
 });
+
+// @desc Delete post
+// @route DELETE /api/v1/post/:id
+// @access Private
+
+exports.deletePost = asyncHandler(async (req, res) => {
+  await Post.findByIdAndDelete(req.params.id);
+
+  res.status(200).json({
+    status: "success",
+    message: "Post successfully deleted",
+  });
+});
+
+// @desc Update post
+// @route PUT /api/v1/posts/:id
+// @access Private
+
+exports.updatePost = asyncHandler(async (req, res) => {
+  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    status: "success",
+    message: "Post successfully updated",
+    post,
+  });
+});
