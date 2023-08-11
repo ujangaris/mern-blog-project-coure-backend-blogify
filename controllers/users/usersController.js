@@ -177,3 +177,43 @@ exports.profileViewers = asyncHandler(async (req, res) => {
     message: "You have successfully viewed his/hem profile",
   });
 });
+
+// @desc Following user
+// @route Put /api/v1/users/following/:userIdToFollow
+// @access Private
+
+exports.followingUser = asyncHandler(async (req, res) => {
+  // find the current user
+  const currentUserId = req.userAuth._id;
+  // !find the user to follow
+  const userToFollowId = req.params.userToFollowId;
+  // Avoid user following himself
+  if (currentUserId.toString() === userToFollowId.toString()) {
+    throw new Error("You cannot yourself");
+  }
+  // push the userToFollowId into the current user following field
+  await User.findByIdAndUpdate(
+    currentUserId,
+    {
+      $addToSet: { following: userToFollowId },
+    },
+    {
+      new: true,
+    }
+  );
+  // push the currentUserId into the user to follow followers field
+  await User.findByIdAndUpdate(
+    userToFollowId,
+    {
+      $addToSet: { followers: currentUserId },
+    },
+    {
+      new: true,
+    }
+  );
+  // send the response(200)
+  res.status(200).json({
+    status: "success",
+    message: "You followed the user successfully",
+  });
+});
