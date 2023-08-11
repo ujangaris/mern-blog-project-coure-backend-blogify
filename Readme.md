@@ -34,3 +34,34 @@
                  "blockedUsers": [
                     "64d600f5a07ac3182c7f69e3"
                 ],
+
+### Unblocking User Controller
+
+    Todo:
+    1.  controllers/posts/postsController.js
+        - exports.unblockUser
+        - pasang asyncHandler
+        - find the current user
+        - check if user is blocked before unblocking
+        - remove the user from current user blocked users array
+        - resave the current user
+        - response code(200)
+    2.  routes/users/usersRouter.js
+        - import dan pasang unblokUser dari usersController
+        - block user
+        - method:put('/unblock/:userIdToUnBlock)
+        - pasang isLoggin
+        - pasang unblockUser
+    3.  pengujian pada postman
+        -  login dengan user kita
+            POST {{baseURL}}/users/login
+        - kemudian liat pada profile:
+            GET {{baseURL}}/users/profile
+            - disini copy id user yang di block
+        - blok user
+            PUT {{baseURL}}/users/<id user yang ingin di unblock>
+        - hasil response : success(200)
+        - kemudian liat pada profile:
+            GET {{baseURL}}/users/profile
+            - user dengan id yang kit apilih sudah terhapus:
+                 "blockedUsers": [],

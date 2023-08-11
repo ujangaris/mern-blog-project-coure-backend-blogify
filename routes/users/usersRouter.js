@@ -4,6 +4,7 @@ const {
   login,
   getProfile,
   blockUser,
+  unblockUser,
 } = require("../../controllers/users/usersController");
 const isLoggin = require("../../middlewares/isLoggin");
 
@@ -18,6 +19,8 @@ usersRouter.post("/login", login);
 usersRouter.get("/profile/", isLoggin, getProfile); //ini harusnya kita buat error jika id kosong
 // block user
 usersRouter.put("/block/:userIdToBlock", isLoggin, blockUser);
+// unblock user
+usersRouter.put("/unblock/:userIdToUnBlock", isLoggin, unblockUser);
 
 // * Export
 module.exports = usersRouter;
