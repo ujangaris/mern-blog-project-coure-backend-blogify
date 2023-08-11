@@ -54,7 +54,7 @@ exports.createPost = asyncHandler(async (req, res) => {
 // @access Public
 
 exports.getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({});
+  const posts = await Post.find({}).populate("comments");
 
   res.status(200).json({
     status: "success",

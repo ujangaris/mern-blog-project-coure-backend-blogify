@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
   {
-    text: {
+    message: {
       type: String,
       required: true,
     },

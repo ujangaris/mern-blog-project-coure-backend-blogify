@@ -157,3 +157,46 @@
         - parameter pertama nanti yang akan di panggil
         - parameter kedua adalah hasil response dari database
 
+### Create Comment Controller and Populate Post comment
+
+    Todo:
+    1.  controllers/comments/commentsController.js
+        - import dan pasang asyncHandler
+        - import pasang Comment model
+        - import pasang Post model
+        - exports.createComment
+        - get the payload
+        - get postId from params
+        - createComment
+        - Associate comment to a post
+        - send the response(201)
+    2.  model/comments/Comment.js
+        - rubah field text menjadi message
+    3.  routes/comments/commentRouter.js
+        - import dan pasang express
+        - import dan pasang isLoggin
+        - import dan pasang createComment dari comentController
+        - create comment
+        export commentRouter
+    4.  server.js
+        - buat enpoint untuk comments
+        - import dan pasang commentRouter
+    5.  untuk menampilkan comment pada post
+        - conttrollers/posts/postController.js
+            - pasang populate yang membungkus field comments
+    6.  pengujian pada postman
+        - login terlebih dahulu dengan user teerdaftar
+            - POST http://localhost:9080/api/v1/users/login
+        - request data all post, untuk memilih id post
+            - POST http://localhost:9080/api/v1/posts
+        - create comment
+            - POST {{baseURL}}/comments/<postId>
+            - Authorization -> Bearer Token -> {token}
+              ini token sudah fleksibel jika login baru otomatis terpanggil(karna sudah di setting token fleksible)
+            - body -> row -> json:
+            {
+                "message": "Wow..."
+            }
+        - hasil response: success(201)
+        - buka pada request all post field comments akan terisi
+            POST http://localhost:9080/api/v1/posts
