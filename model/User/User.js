@@ -58,7 +58,6 @@ const userSchema = new mongoose.Schema(
       enum: ["male", "female", "prefer not to say", "non-binary"],
     },
     profileViewers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    profileViewers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     blockedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],

@@ -5,6 +5,7 @@ const {
   getProfile,
   blockUser,
   unblockUser,
+  profileViewers,
 } = require("../../controllers/users/usersController");
 const isLoggin = require("../../middlewares/isLoggin");
 
@@ -21,6 +22,8 @@ usersRouter.get("/profile/", isLoggin, getProfile); //ini harusnya kita buat err
 usersRouter.put("/block/:userIdToBlock", isLoggin, blockUser);
 // unblock user
 usersRouter.put("/unblock/:userIdToUnBlock", isLoggin, unblockUser);
+// profile viewers
+usersRouter.get("/profile-viewer/:userProfileId", isLoggin, profileViewers);
 
 // * Export
 module.exports = usersRouter;
