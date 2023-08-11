@@ -200,3 +200,46 @@
         - hasil response: success(201)
         - buka pada request all post field comments akan terisi
             POST http://localhost:9080/api/v1/posts
+
+### Update & Delete Comment
+
+    Todo:
+    1.  controllers/comments/commentsController.js
+        - update comment
+            - exports.updateComment
+            - findByIdAndUpdate
+            - send the response(200)
+        - delete comment
+            - exports.deleteComment
+            - findByIdAndDelete
+            - send the response(200)
+
+    2.  routes/comments/commentRouter.js
+        - update comment
+            - import dan pasang updateComment
+            - Method: put('/:id)
+            - pasang isLoggin
+        - delete comment
+            - import dan pasang deleteComment
+            - Method: delete('/:id)
+            - pasang isLoggin
+
+    3.  pengujian pada postman
+        - login terlebih dahulu dengan user teerdaftar
+            - POST {{baseURL}}/api/v1/users/login
+        - request data all post, untuk memilih id comment
+            - POST {{baseURL}}/api/v1/posts
+        - update comment
+            - POST {{baseURL}}/comments/<comment Id>
+            - Authorization -> Bearer Token -> {token}
+              ini token sudah fleksibel jika login baru otomatis terpanggil(karna sudah di setting token fleksible)
+            - body -> row -> json:
+            {
+                "message": "update comment"
+            }
+        - hasil response: success(200)
+
+        - delete comment
+            - POST {{baseURL}}/comments/<comment Id>
+        - hasil response: success(200), dan data akan terhapus
+        - noted: {{baseURL}} ini digunakan karna sudah di setup environment variable pada postman
