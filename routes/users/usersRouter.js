@@ -7,6 +7,7 @@ const {
   unblockUser,
   profileViewers,
   followingUser,
+  unFollowingUser,
 } = require("../../controllers/users/usersController");
 const isLoggin = require("../../middlewares/isLoggin");
 
@@ -27,6 +28,8 @@ usersRouter.put("/unblock/:userIdToUnBlock", isLoggin, unblockUser);
 usersRouter.get("/profile-viewer/:userProfileId", isLoggin, profileViewers);
 // following
 usersRouter.put("/following/:userToFollowId", isLoggin, followingUser);
+// unfollowing
+usersRouter.put("/unfollowing/:userToUnFollowId", isLoggin, unFollowingUser);
 
 // * Export
 module.exports = usersRouter;
