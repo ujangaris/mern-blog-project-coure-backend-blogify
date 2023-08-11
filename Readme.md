@@ -146,3 +146,14 @@
             DELETE http://localhost:9080/api/v1/posts/<id post>
         - hasil response: success(200)
             data akan terhapus
+
+### fleksible token to postman
+
+    Todo:
+    1.  pada postman
+        POST http://localhost:9080/api/v1/users/login
+        => test : pm.environment.set("token", pm.response.json().token)
+        ket:
+        - parameter pertama nanti yang akan di panggil
+        - parameter kedua adalah hasil response dari database
+
