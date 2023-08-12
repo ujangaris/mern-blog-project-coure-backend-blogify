@@ -10,8 +10,9 @@ const {
 const categoryRouter = require("./routes/category/categoryRouter");
 const postsRouter = require("./routes/post/postsRouter");
 const commentRouter = require("./routes/comments/commentRouter");
+const sendEmail = require("./utils/sendEmail");
 require("./config/database")();
-
+sendEmail("arisandiujang@gmail.com", "test aplikasi wkwkwk");
 // !Server
 const app = express();
 console.log(process.env.MYKEY);

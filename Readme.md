@@ -162,3 +162,39 @@
             - pada following akan terhapus id yang kita unfollow
         - noted jika login dengan user yang di unfollow
           pada field followers akan terhapus id user yang memfollow
+
+### Email Sending Using Nodemailer & Password for Gmail Account
+
+    Todo:
+    1.  install nodemailer
+        - npm install nodemailer
+    2.  gmail account
+        - pada profile gmail klik poto profile
+        - kemudian pilih manage your Google Account
+        - security -> pada How you sign in to Google
+          pilih 2-step Verification on sice >
+        - akan diarahkan untuk login kembali, silahkan login
+        - lalu scroll kebawah , pada App passwords
+        - pada select app pilih other custome name , namakan blogify, kemudian klik generate
+        - copy token dibawah Your app password for your device(pasang pada file .env)
+    3.  .env
+        - password
+        - user email pengirim/use email address
+    4.  utils/sendEmail.js
+        - import dan pasang nodemailer
+        - create transport
+        - create msg
+        - send the email
+        - remove the userToUnFollowId from the current user following field
+        - remove the currentUserId from  the user to unfollow followers field
+        - response code(200)
+    5.  server.js
+        - import dan pasang sendEmail
+        - pasang dotenv sebagai configuration
+        - sendEmail untuk pasarameter pertama email penerima
+        - sendEmail untuk pasarameter kedua email pesan
+    6.  pengujian pada postman
+        - restart ulang server
+        - pada terminal akan ada : Email sent <9911afea-95f0-3b82-7904-d3f1ef48e01a@localhost>
+        - periksa email yang kita daftarkan pada file server.js
+        - akan ada pesan masuk dari ujangaja@gmail.com yang didalamnya terdapat link reset password
