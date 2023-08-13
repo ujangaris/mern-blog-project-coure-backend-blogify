@@ -198,3 +198,48 @@
         - pada terminal akan ada : Email sent <9911afea-95f0-3b82-7904-d3f1ef48e01a@localhost>
         - periksa email yang kita daftarkan pada file server.js
         - akan ada pesan masuk dari ujangaja@gmail.com yang didalamnya terdapat link reset password
+
+### Forgot Password Controller
+
+    Todo:
+    1.  model/User.js
+        - Generate password reset token
+        - import dan pasang crypto package
+        - generate token
+        - Assign the token to passwordResetToken field
+        - update the passwordResetExpires and when to expire
+    2.  controllers/users/usersController.js
+        - npm exports.forgotPassword
+        - Find the email in our db
+        - Create token
+        - resave the user
+        - send email message
+        - import dan pasang sendEmail
+        - pada sendEmail :
+            - parameter pertama adalah inputan email yang dimasukan pada body di postman
+            - parameter kedua adalah token yang sudah digenerate
+        - response (200)
+    3.  server.js
+        - hapus yang berhubungan dengan sendEmail karna, sendEmail akan di pasang di usersController
+    4.  routes/users/usersRouter.js
+        - forgot password
+        - method:post('/forgot-password')
+        - import dan pasang forgotPassword
+    3.  pengujian pada postman
+        - restart ulang server
+        - POST {{baseURL}}/users/forgot-password
+        - body -> row -> json:
+            {
+
+                "email":"arisandiujang@gmail.com"
+            }
+        - noted: email pada body harus terdaftar pada aplikasi dan email asli yang dapat menerimapesan email
+        - response akan menampilkan : "message": "Password Reset email sent"
+
+        - pada terminal akan ada :
+            Server is running on port 9080
+            DB has been connected
+            a3b6b3b9f6f977680df5591d70a512b0ca8d3ae2
+            Email sent <bba73082-1470-5a76-d67e-90c4dc807de9@localhost>
+        - periksa email yang kita input pada forgot-password
+        - akan ada pesan masuk dari ujangaja@gmail.com yang didalamnya terdapat link reset password

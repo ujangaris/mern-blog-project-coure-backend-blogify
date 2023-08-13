@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 const User = require("../../model/User/User");
 const generateToken = require("../../utils/generateToken");
+const sendEmail = require("../../utils/sendEmail");
 
 // @desc Register a new user
 // @route Post /api/v1/users/register
@@ -256,4 +257,26 @@ exports.unFollowingUser = asyncHandler(async (req, res) => {
     status: "success",
     message: "You have unfollowed the user successfully",
   });
+});
+
+// @desc Forgot Password
+// @route POST /api/v1/users/forgot-password
+// @access Public
+
+exports.forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  // Find the email in our db
+  const userFound = await User.findOne({ email });
+  if (!userFound) {
+    throw new Error("There's No Email In Our System");
+  }
+  // Create token
+  const resetToken = await userFound.generatePasswordResetToken();
+  console.log(resetToken);
+  // resave the user
+  await userFound.save();
+  // send email message
+  sendEmail(email, resetToken);
+  // response (200)
+  res.status(200).json({ message: "Password Reset email sent" });
 });
