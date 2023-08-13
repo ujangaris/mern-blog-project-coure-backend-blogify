@@ -243,3 +243,38 @@
             Email sent <bba73082-1470-5a76-d67e-90c4dc807de9@localhost>
         - periksa email yang kita input pada forgot-password
         - akan ada pesan masuk dari ujangaja@gmail.com yang didalamnya terdapat link reset password
+
+### Reset Password Controller
+
+    Todo:
+    1.  controllers/users/usersController.js
+        - exports.resetPassword
+        - Get the id/token from email /params
+        - Convert the token to actual token that has been  saved in the db
+        - find the user by the crypto token
+        - response (200)
+    2.  routes/users/usersRouter.js
+        - reset password
+        - method:post('/reset-password/:resetToken')
+        - import dan pasang resetPassword
+    3.  pengujian pada postman
+        - restart ulang server
+        - periksa email yang kita input pada forgot-password
+        - akan ada pesan masuk dari ujangaja@gmail.com yang didalamnya terdapat
+          link reset password(ini pakai inbox lama gpp karna expired satu hari)
+        - klik link pada email, kemudian copy token yang terdapat pada path url  reset password
+        - POST {{baseURL}}/users/reset-password/<pastekan token yang  telah dicopy pada path url reset password>
+        - body -> row -> json:
+            {
+
+                "email":"arisandiujang@gmail.com"
+            }
+        - noted: email pada body harus email yang kita input pada forgot password
+        - response akan menampilkan data user dan pada passwordResetToken terisi token,
+          yang mengindikasikan setup yang kita lakukan berhasil:
+            "passwordResetToken": "2fdd355981c6d3cd4159060cdff5a97472f2de4c60b482bc9630bdfb710a7935"
+        - nilai dari passwordResetToken isinya akan sama dengan yang berada di postman,  database dan console.log
+        - pada terminal akan ada :
+            Server is running on port 9080
+            DB has been connected
+            2fdd355981c6d3cd4159060cdff5a97472f2de4c60b482bc9630bdfb710a7935

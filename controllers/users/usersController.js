@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
-
+const crypto = require("crypto");
 const User = require("../../model/User/User");
 const generateToken = require("../../utils/generateToken");
 const sendEmail = require("../../utils/sendEmail");
@@ -279,4 +279,29 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
   sendEmail(email, resetToken);
   // response (200)
   res.status(200).json({ message: "Password Reset email sent" });
+});
+
+// @desc Reset password
+// @route POST /api/v1/users/reset-password/:resetToken
+// @access Public
+
+exports.resetPassword = asyncHandler(async (req, res) => {
+  // Get the id/token from email /params
+  const { resetToken } = req.params;
+  const { password } = req.body;
+  // Convert the token to actual token that has been  saved in the db
+  const cryptoToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  console.log(cryptoToken);
+  // find the user by the crypto token
+  const userFound = await User.findOne({
+    passwordResetToken: cryptoToken,
+  });
+  // response (200)
+  res.status(200).json({
+    message: "User found",
+    userFound,
+  });
 });

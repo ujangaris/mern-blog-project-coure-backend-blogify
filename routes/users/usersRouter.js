@@ -9,6 +9,7 @@ const {
   followingUser,
   unFollowingUser,
   forgotPassword,
+  resetPassword,
 } = require("../../controllers/users/usersController");
 const isLoggin = require("../../middlewares/isLoggin");
 
@@ -37,6 +38,8 @@ usersRouter.put("/unfollowing/:userToUnFollowId", isLoggin, unFollowingUser);
 
 // forgot password
 usersRouter.post("/forgot-password", forgotPassword);
+// reset password
+usersRouter.post("/reset-password/:resetToken", resetPassword);
 
 // * Export
 module.exports = usersRouter;
