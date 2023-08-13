@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const User = require("../../model/User/User");
 const generateToken = require("../../utils/generateToken");
 const sendEmail = require("../../utils/sendEmail");
+const sendAccVerificationEmail = require("../../utils/sendAccVerificationEmail");
 
 // @desc Register a new user
 // @route Post /api/v1/users/register
@@ -313,5 +314,27 @@ exports.resetPassword = asyncHandler(async (req, res) => {
   // response (200)
   res.status(200).json({
     message: "Password reset successfully",
+  });
+});
+
+// @desc Send Account verification email
+// @route POST /api/v1/users/account-verification-email
+// @access Private
+
+exports.accountVerificationEmail = asyncHandler(async (req, res) => {
+  // find the loggin user email
+  const user = await User.findById(req.userAuth._id);
+  if (!user) {
+    throw new Error("User not found");
+  }
+  // send the token
+  const token = await user.generateAccVerificationToken();
+  // resave
+  await user.save();
+  // send the email
+  sendAccVerificationEmail(user.email, token);
+  // status (200)
+  res.status(200).json({
+    message: `Account verificatioon email sent ${user?.email}`,
   });
 });

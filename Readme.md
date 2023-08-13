@@ -322,3 +322,42 @@
             passwordResetToken & passwordResetExpires akan terisi
           namun ketika masuk proses reset-password,
             passwordResetToken & passwordResetExpires akan kosong/undefined
+
+### Account Verification controller & routes
+
+    Todo:
+    1.  model/users/User.js
+        - agar lebih muda copy dan paste dari code Generate password reset token lalu modifikasi
+        - Generate token for account verification
+        - userSchema.methods.generateAccVerificationToken
+        - generate token
+        - Assign the token to accountVerificationToken field
+        - update the accountVerificationExpires and when to expire
+    2.  utils/sendAccVerificationEmail.js
+        - duplikat file utils/sendEmail lalu beri nama sendAccVerificationEmail.js
+        - nama function dan module.export di beri nama : sendAccVerificationEmail
+        - kemudian pada isi code bagian message di modifikasi untuk keperluan verifikasi email
+    3.  controllers/users/usersController.js
+        - exports.accountVerificationEmail
+        - find the loggin user email
+        - send the token
+        - resave
+        - import dan pasang sendAccVerificationEmail
+        - send the email
+        - response (200)
+    4.  routes/users/usersRouter.js
+        - send account verification email
+        - method:put('/account-verification-email')
+        - import dan pasang accountVerificationEmail
+        - pasang isLoggin
+    5.  pengujian pada postman
+        - PUT {{baseURL}}/users/account-verification-email
+        - body -> row -> json:
+            {
+
+                "email":"arisandiujang@gmail.com"
+            }
+        - noted: email pada body harus terdaftar pada aplikasi dan email asli yang dapat menerimapesan email
+        - response akan menampilkan : "message": "Account verificatioon email sent arisandiujang@gmail.com"
+        - lihat pada inbox email yang kita masukan pada body yakni arisandiujang@gmail.com
+          akan ada pesan account verification
