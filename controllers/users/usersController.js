@@ -278,7 +278,7 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
   // send email message
   sendEmail(email, resetToken);
   // response (200)
-  res.status(200).json({ message: "Password Reset email sent" });
+  res.status(200).json({ message: "Password Reset email sent", resetToken });
 });
 
 // @desc Reset password
@@ -298,10 +298,20 @@ exports.resetPassword = asyncHandler(async (req, res) => {
   // find the user by the crypto token
   const userFound = await User.findOne({
     passwordResetToken: cryptoToken,
+    passwordResetExpires: { $gt: Date.now() },
   });
+  if (!userFound) {
+    throw new Error("Password reset token is invalid or has expired");
+  }
+  // Update the user password
+  const salt = await bcrypt.genSalt(10);
+  userFound.password = await bcrypt.hash(password, salt);
+  userFound.passwordResetExpires = undefined;
+  userFound.passwordResetToken = undefined;
+  // reset the user
+  await userFound.save();
   // response (200)
   res.status(200).json({
-    message: "User found",
-    userFound,
+    message: "Password reset successfully",
   });
 });

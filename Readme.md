@@ -278,3 +278,47 @@
             Server is running on port 9080
             DB has been connected
             2fdd355981c6d3cd4159060cdff5a97472f2de4c60b482bc9630bdfb710a7935
+
+### Reset Password Controller | update password
+
+    Todo:
+    1.  controllers/users/usersController.js
+        - pada exports.forgotPassword di response tambahkan resetToken
+        - pada exports.resetPassword
+            - passwordResetExpires
+            - pasang kondisi jika passwordResetToken & passwordResetExpires tidak ditemukan.
+              (userFound berisi kan data passwordResetToken & passwordResetExpires )
+            - Update the user password
+            - reset the user
+            - response (200)
+    2.  pengujian pada postman
+        - POST {{baseURL}}/users/forgot-password
+        - body -> row -> json:
+            {
+
+                "email":"arisandiujang@gmail.com"
+            }
+        - pada response copy isi resetToken
+        - POST {{baseURL}}/users/reset-password/<pastekan resetToken yang  telah dicopy >
+        - body -> row -> json:
+            {
+
+                "email":"arisandiujang@gmail.com",
+                "password":"1234",
+            }
+        - noted: email pada body harus email yang kita input pada forgot password
+        - response akan menampilkan :  "message": "Password reset successfully"
+        - nilai dari passwordResetToken isinya akan sama dengan yang berada di postman,  database dan console.log
+        - pada terminal akan ada :
+            Server is running on port 9080
+            DB has been connected
+            2fdd355981c6d3cd4159060cdff5a97472f2de4c60b482bc9630bdfb710a7935
+
+        - sekarang coba login dengan email yang baru saja di reset passwordnya
+        - noted: gunakan password baru yakni : 1234
+        - jika setup yang dilakukan benar , maka login dengan password baru berhasil
+
+        - tambahan jika diperhatikan pada proses forgot-password,
+            passwordResetToken & passwordResetExpires akan terisi
+          namun ketika masuk proses reset-password,
+            passwordResetToken & passwordResetExpires akan kosong/undefined
