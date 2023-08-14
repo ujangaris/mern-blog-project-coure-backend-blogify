@@ -98,15 +98,15 @@ userSchema.methods.generatePasswordResetToken = function () {
 // ! Generate token for account verification
 userSchema.methods.generateAccVerificationToken = function () {
   // generate token
-  const resetToken = crypto.randomBytes(20).toString("hex");
+  const verificationToken = crypto.randomBytes(20).toString("hex");
   // Assign the token to accountVerificationToken field
   this.accountVerificationToken = crypto
     .createHash("sha256")
-    .update(resetToken)
+    .update(verificationToken)
     .digest("hex");
   // update the accountVerificationExpires and when to expire
   this.accountVerificationExpires = Date.now() + 10 * 60 * 1000; //! 10 minutes
-  return resetToken;
+  return verificationToken;
 };
 // compile schema to model
 const User = mongoose.model("User", userSchema);

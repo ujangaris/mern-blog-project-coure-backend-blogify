@@ -323,7 +323,7 @@
           namun ketika masuk proses reset-password,
             passwordResetToken & passwordResetExpires akan kosong/undefined
 
-### Account Verification controller & routes
+### Account Verification Email controller & routes
 
     Todo:
     1.  model/users/User.js
@@ -361,3 +361,43 @@
         - response akan menampilkan : "message": "Account verificatioon email sent arisandiujang@gmail.com"
         - lihat pada inbox email yang kita masukan pada body yakni arisandiujang@gmail.com
           akan ada pesan account verification
+
+### Verify Account
+
+    Todo:
+    1.  model/users/User.js
+        - agar lebih muda dipahami ganti resetToken dengan verificationToken
+    2.  controllers/users/usersController.js
+        - exports.verifyAccountexports.accountVerificationEmail
+        - Get the id/token  /params
+        - Convert the token to actual verifyToken that has been  saved in the db
+        - find the user by the crypto token
+        - Update user accountUpdate user account
+        - reset the user
+        - response (200)
+    3.  routes/users/usersRouter.js
+        - verify account
+        - method:put('/account-verification/:verifyToken')
+        - import dan pasang accountVerificationEmail
+        - pasang isLoggin
+    4.  pengujian pada postman
+        - login dengan account yang ingin di verifikasi
+        - Account verification email :
+            PUT {{baseURL}}/users/account-verification-email
+            - body -> row -> json:
+            {
+
+                "email":"arisandiujang@gmail.com"
+            }
+
+        - response akan menampilkan : "message": "Account verification email sent arisandiujang@gmail.com"
+        - noted: email pada body harus terdaftar pada aplikasi dan email asli yang dapat menerimapesan email
+        - lihat pada inbox email yang kita masukan pada body yakni arisandiujang@gmail.com,
+          akan ada pesan account verification, klik link
+        - kemudian akan di redirect ke halaman web copas verifyToken pada path dan pastekan pada request  verify account
+
+        - verify account :
+            PUT {{baseURL}}/users/account-verification/<account-verification/:verifyToken>
+
+        - response akan menampilkan : "message": "Account verified successfully"
+        - dan pada user yang sudah terverifikasi akan ada field pada database yakni : "isVerified": "true"

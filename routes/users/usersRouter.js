@@ -11,6 +11,7 @@ const {
   forgotPassword,
   resetPassword,
   accountVerificationEmail,
+  verifyAccount,
 } = require("../../controllers/users/usersController");
 const isLoggin = require("../../middlewares/isLoggin");
 
@@ -48,6 +49,8 @@ usersRouter.put(
   isLoggin,
   accountVerificationEmail
 );
+//  verify account 
+usersRouter.put("/account-verification/:verifyToken", isLoggin, verifyAccount);
 
 // * Export
 module.exports = usersRouter;
