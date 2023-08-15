@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     isVerified: {
       type: String,
-      required: true,
+      required: false,
     },
     accountLevel: {
       type: String,
