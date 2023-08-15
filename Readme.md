@@ -18,7 +18,6 @@
     1.  model/Category/Category.js
     2.  model/Comment/Comment.js
 
-
 ## Bagian 7: Authentication & Authorisation Backend
 
 ### Dummy User Registration Controller
@@ -960,6 +959,8 @@
         - noted jika login dengan user yang di unfollow
           pada field followers akan terhapus id user yang memfollow
 
+## Bagian 13: Forgot & Password Reset || Backend
+
 ### Email Sending Using Nodemailer & Password for Gmail Account
 
     Todo:
@@ -1120,6 +1121,8 @@
           namun ketika masuk proses reset-password,
             passwordResetToken & passwordResetExpires akan kosong/undefined
 
+## Bagian 14: Account Verification || Backend
+
 ### Account Verification Email controller & routes
 
     Todo:
@@ -1238,4 +1241,3 @@
         - respon akan menampilkan pesan status : "succes"(200)
         - artinya user yang sudah terferifikasi dapat membuat data post baru
         - sampai sini setup yang kita lakukan untuk middleware verifikasi succes.
-
