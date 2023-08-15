@@ -10,6 +10,7 @@ const {
   likePost,
   disLikePost,
   claps,
+  schedule,
 } = require("../../controllers/posts/postsController");
 const checkAccountVerification = require("../../middlewares/isAccountVerified");
 const postsRouter = express.Router();
@@ -32,5 +33,8 @@ postsRouter.put("/dislikes/:id", isLoggin, disLikePost);
 
 // clap post
 postsRouter.put("/claps/:id", isLoggin, claps);
+
+// schedule post
+postsRouter.put("/schedule/:postId", isLoggin, schedule);
 // * Export
 module.exports = postsRouter;

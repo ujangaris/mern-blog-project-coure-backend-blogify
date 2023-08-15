@@ -213,3 +213,41 @@ exports.claps = asyncHandler(async (req, res) => {
     .status(200)
     .json({ message: "Post clapped successfully", post: updatedPost });
 });
+
+// @desc Schedule a post
+// @route PUT /api/v1/posts/schedule/:postId
+// @access Private
+
+exports.schedule = asyncHandler(async (req, res) => {
+  // get the payload
+  const { scheduledPublish } = req.body;
+  const { postId } = req.params;
+  // check if postId and scheduledPublish found
+  if (!postId || !scheduledPublish) {
+    throw new Error("PostID and schedule date are required");
+  }
+  // find the post
+  const post = await Post.findById(postId);
+  if (!post) {
+    throw new Error("Post not found");
+  }
+  //check if the user is the author of the post
+  if (post.author.toString() !== req.userAuth._id.toString()) {
+    throw new Error("You can schedule your own post");
+  }
+  // check if the scheduledPublish date is in the past
+  const scheduleDate = new Date(scheduledPublish);
+  const currentDate = new Date();
+  if (scheduleDate < currentDate) {
+    throw new Error("The scheduled publish date cannot be in the past.");
+  }
+  // update the post
+  post.scheduledPublished = scheduledPublish;
+  await post.save();
+  // response success(200)
+  res.status(200).json({
+    status: "success",
+    message: "Post scheduled successfully",
+    post,
+  });
+});

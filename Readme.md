@@ -1309,7 +1309,7 @@
 
     Todo :
     1.  controllers/posts/postsController.js
-        - exports.claps exports.disLikePos
+        - exports.claps
         - Get the id of the post
         - find the post
         - Implement the claps using $inc
@@ -1327,3 +1327,35 @@
         - response akan menampilkan : status :"success"(200)
           & data post
         - data claps akan bertambah jika request claps di request ulang
+
+### Schedule Post Controller & routes
+
+    Todo :
+    1.  controllers/posts/postsController.js
+        - exports.schedule
+        - get the payload
+        - check if postId and scheduledPublish found
+        - find the post
+        - check if the user is the author of the post
+        - check if the scheduledPublish date is in the past
+        - update the post
+        - response status(200)
+    2.  routes/post/postsRouter.js
+        - schedule post
+        - method : put('/schedule/:postId')
+        - import dan pasang schedule
+    3.  pengujian pada postman:
+        - login dengan user yang terdaftar
+        - get all user untuk mengcopy salah satu id post
+        - request dislike post
+            PUT {{baseURL}}/posts/schedule/<id post>
+            body -> raw-> json:
+            {
+                "scheduledPublish":"2023-08-16"
+            }
+        - response akan menampilkan : status :"success"(200)
+          & data post
+        - noted:
+            - perhatikan penulisan tanggal pada body, jika salah akan error
+            - tanggal harus +1 dari hari ini
+            - scheduledPublish ini adalah yang menampung req.body
