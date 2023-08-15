@@ -401,3 +401,43 @@
 
         - response akan menampilkan : "message": "Account verified successfully"
         - dan pada user yang sudah terverifikasi akan ada field pada database yakni : "isVerified": "true"
+
+### Is Account Verified Middleware
+
+    Todo:
+    1.  middlewares/isAccountVerified.js
+        - import dan pasang model User
+        - buat function chekAccountVerification(v)
+        - find the login user
+        - pasang try catch
+            - check if user is verified
+            - buat status 401, dan 500
+    2.  routes/posts/postsRouter.js
+        - import dan pasang checkAccountVerification
+        - pada create post tambahkaan checkAccountVerification
+            * method:post('isLoggin, checkAccountVerification, createPos')
+    3.  model/User.js
+        - ubah isVerify dari type string ke Boolean
+            *   isVerified: {
+                    type: Boolean,
+                    required: false,
+                },
+    4.  pengujian pada postman
+        - mudaahnya, register akun baru
+        - kemudian login dengan akun tersebut
+        - jangan lakukan verifikasi email terlebih dahulu
+        - lalu coba request create post
+            POST {{baseURL}}/posts
+            - body -> row -> json:
+            {
+                "title":"Why Mern 2",
+                "content":"some content",
+                "categoryId":"64d49e37d07a62ad8e4de61e"
+            }
+
+        - response akan menampilkan : "message": "Account not verified"
+
+        - coba uji create post  dengan akun yang sudah terferifikasi,
+        - respon akan menampilkan pesan status : "succes"(200)
+        - artinya user yang sudah terferifikasi dapat membuat data post baru
+        - sampai sini setup yang kita lakukan untuk middleware verifikasi succes.
