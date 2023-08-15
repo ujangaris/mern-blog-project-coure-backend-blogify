@@ -14,7 +14,6 @@ require("./config/database")();
 
 // !Server
 const app = express();
-console.log(process.env.MYKEY);
 
 // middlewares
 app.use(express.json()); //Pass incoming data
