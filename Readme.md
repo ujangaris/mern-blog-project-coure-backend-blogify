@@ -1302,3 +1302,28 @@
           & data post
         - jika dislike di request lagi maka data dislike akan hilang
         - begitupun jika user me-like post kembali ketika sudah like maka data like akan terhapus.
+
+## Bagian 16: Post Claps & Scheduling Controllers || Backend
+
+### Post Claps Controller & route
+
+    Todo :
+    1.  controllers/posts/postsController.js
+        - exports.claps exports.disLikePos
+        - Get the id of the post
+        - find the post
+        - Implement the claps using $inc
+        - Fetch the updated post
+        - response status(200)
+    2.  routes/post/postsRouter.js
+        - clap post
+        - method : put('/claps/:id') id => id post
+        - import dan pasang claps
+    3.  pengujian pada postman:
+        - login dengan user yang terdaftar
+        - get all user untuk mengcopy salah satu id post
+        - request dislike post
+            PUT {{baseURL}}/posts/claps/<id post>
+        - response akan menampilkan : status :"success"(200)
+          & data post
+        - data claps akan bertambah jika request claps di request ulang

@@ -183,3 +183,33 @@ exports.disLikePost = asyncHandler(async (req, res) => {
   // response status(200)
   res.status(200).json({ message: "Post disliked successfully", post });
 });
+
+// @desc clapong a post
+// @route PUT /api/v1/posts/claps/:id
+// @access Private
+
+exports.claps = asyncHandler(async (req, res) => {
+  // Get the id of the post
+  const { id } = req.params;
+  // Find the post
+  const post = await Post.findById(id);
+  if (!post) {
+    return res.status(404).json({ message: "Post not found" });
+  }
+  // Implement the claps using $inc
+  await Post.findByIdAndUpdate(
+    id,
+    {
+      $inc: { claps: 1 },
+    },
+    { new: true }
+  );
+
+  // Fetch the updated post
+  const updatedPost = await Post.findById(id);
+
+  // Response status(200)
+  res
+    .status(200)
+    .json({ message: "Post clapped successfully", post: updatedPost });
+});
