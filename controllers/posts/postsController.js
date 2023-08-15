@@ -120,31 +120,66 @@ exports.likePost = asyncHandler(async (req, res) => {
   if (!post) {
     throw new Error("Post not found");
   }
-  // // check if the user has already liked the post
-  // const userHasLiked = post.likes.some(
-  //   (like) => like.toString() === userId.toString()
-  // );
-  // if (userHasLiked) {
-  //   throw new Error("User has already liked this post");
-  // }
-
-  ///Push thr user into post likes
-
-  await Post.findByIdAndUpdate(
-    id,
-    {
-      $addToSet: { likes: userId },
-    },
-    { new: true }
-  );
-  // Remove the user from the dislikes array if present
-  if (post.dislikes) {
-    post.dislikes = post.dislikes.filter(
-      (dislike) => dislike.toString() !== userId.toString()
+  // Toggle the user in post likes
+  if (post.likes.includes(userId)) {
+    // Remove the user from the likes array
+    post.likes = post.likes.filter(
+      (like) => like.toString() !== userId.toString()
     );
+  } else {
+    // Add the user to the likes array
+    post.likes.addToSet(userId);
+
+    // Remove the user from the dislikes array if present
+    if (post.dislikes) {
+      post.dislikes = post.dislikes.filter(
+        (dislike) => dislike.toString() !== userId.toString()
+      );
+    }
   }
   // Save the updated post
   await post.save();
   // response status(200)
   res.status(200).json({ message: "Post liked successfully", post });
+});
+
+// @desc Dislike a post
+// @route PUT /api/v1/posts/dislikes/:id
+// @access Private
+
+exports.disLikePost = asyncHandler(async (req, res) => {
+  //Get the id of the post
+  const { id } = req.params;
+  //get the login user
+  const userId = req.userAuth._id;
+  //Find the post
+  const post = await Post.findById(id);
+  if (!post) {
+    throw new Error("Post not found");
+  }
+
+  ///Push thr user into post dislikes
+
+  // Toggle the user in post dislikes
+  if (post.dislikes.includes(userId)) {
+    // Remove the user from the dislikes array
+    post.dislikes = post.dislikes.filter(
+      (dislike) => dislike.toString() !== userId.toString()
+    );
+  } else {
+    // Add the user to the dislikes array
+    post.dislikes.addToSet(userId);
+
+    // Remove the user from the likes array if present
+    if (post.likes) {
+      post.likes = post.likes.filter(
+        (like) => like.toString() !== userId.toString()
+      );
+    }
+  }
+
+  // Save the updated post
+  await post.save();
+  // response status(200)
+  res.status(200).json({ message: "Post disliked successfully", post });
 });

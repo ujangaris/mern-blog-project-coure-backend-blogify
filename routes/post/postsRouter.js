@@ -8,6 +8,7 @@ const {
   updatePost,
   deletePost,
   likePost,
+  disLikePost,
 } = require("../../controllers/posts/postsController");
 const checkAccountVerification = require("../../middlewares/isAccountVerified");
 const postsRouter = express.Router();
@@ -25,5 +26,7 @@ postsRouter.delete("/:id", isLoggin, deletePost);
 
 // like post
 postsRouter.put("/likes/:id", isLoggin, likePost);
+// dislike post
+postsRouter.put("/dislikes/:id", isLoggin, disLikePost);
 // * Export
 module.exports = postsRouter;

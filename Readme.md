@@ -1254,6 +1254,7 @@
         - find the post
         - push the user into post likes
         - remove the user from the dislikes array if parrent
+        - Save the updated post
         - response status(200)
     2.  routes/post/postsRouter.js
         - like post
@@ -1266,3 +1267,38 @@
             PUT {{baseURL}}/posts/likes/<id post>
         - response akan menampilkan : status :"success"(200)
           & data post
+
+### Disliking a Post & remove doble like & doble dislike
+
+    Todo :
+    1.  controllers/posts/postsController.js
+        - pada exports.likePost tambahkan logic remove doble like
+            - Toggle the user in post likes(if else condtion)
+            - modifikasi code Add the user to the likes array
+
+        - exports.disLikePos
+        - Get the id of the post
+        - get the login user
+        - find the post
+        - Push thr user into post dislikes
+        - Toggle the user in post dislikes(if else condition)
+            - Remove the user from the dislikes array
+            - Add the user to the dislikes array
+            - Remove the user from the likes array if present
+        - Save the updated post
+        - response status(200)
+    2.  routes/post/postsRouter.js
+        - dislike post
+        - method : put('/dislikes/:id') id => id post
+        - import dan pasang disLikePost
+    3.  models/Post/Post.js
+        - rubah field disLike menjadi dislike
+    4.  pengujian pada postman:
+        - login dengan user yang terdaftar
+        - get all user untuk mengcopy salah satu id post
+        - request dislike post
+            PUT {{baseURL}}/posts/dislikes/<id post>
+        - response akan menampilkan : status :"success"(200)
+          & data post
+        - jika dislike di request lagi maka data dislike akan hilang
+        - begitupun jika user me-like post kembali ketika sudah like maka data like akan terhapus.
