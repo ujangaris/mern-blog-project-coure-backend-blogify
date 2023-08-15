@@ -959,6 +959,8 @@
         - noted jika login dengan user yang di unfollow
           pada field followers akan terhapus id user yang memfollow
 
+## Bagian 13: Forgot & Password Reset || Backend
+
 ### Email Sending Using Nodemailer & Password for Gmail Account
 
     Todo:
@@ -1118,6 +1120,8 @@
             passwordResetToken & passwordResetExpires akan terisi
           namun ketika masuk proses reset-password,
             passwordResetToken & passwordResetExpires akan kosong/undefined
+
+## Bagian 14: Account Verification || Backend
 
 ### Account Verification Email controller & routes
 
