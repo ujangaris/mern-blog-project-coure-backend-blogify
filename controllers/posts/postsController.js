@@ -105,3 +105,46 @@ exports.updatePost = asyncHandler(async (req, res) => {
     post,
   });
 });
+
+// @desc Liking a post
+// @route PUT /api/v1/posts/likes/:id
+// @access Private
+
+exports.likePost = asyncHandler(async (req, res) => {
+  //Get the id of the post
+  const { id } = req.params;
+  //get the login user
+  const userId = req.userAuth._id;
+  //Find the post
+  const post = await Post.findById(id);
+  if (!post) {
+    throw new Error("Post not found");
+  }
+  // // check if the user has already liked the post
+  // const userHasLiked = post.likes.some(
+  //   (like) => like.toString() === userId.toString()
+  // );
+  // if (userHasLiked) {
+  //   throw new Error("User has already liked this post");
+  // }
+
+  ///Push thr user into post likes
+
+  await Post.findByIdAndUpdate(
+    id,
+    {
+      $addToSet: { likes: userId },
+    },
+    { new: true }
+  );
+  // Remove the user from the dislikes array if present
+  if (post.dislikes) {
+    post.dislikes = post.dislikes.filter(
+      (dislike) => dislike.toString() !== userId.toString()
+    );
+  }
+  // Save the updated post
+  await post.save();
+  // response status(200)
+  res.status(200).json({ message: "Post liked successfully", post });
+});

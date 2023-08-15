@@ -1241,3 +1241,28 @@
         - respon akan menampilkan pesan status : "succes"(200)
         - artinya user yang sudah terferifikasi dapat membuat data post baru
         - sampai sini setup yang kita lakukan untuk middleware verifikasi succes.
+
+## Bagian 15: Post Likes & Dislikes Controllers || Backend
+
+### Post Like Controller & Route
+
+    Todo :
+    1.  controllers/posts/postsController.js
+        - exports.likePost
+        - Get the id the post
+        - get the login user
+        - find the post
+        - push the user into post likes
+        - remove the user from the dislikes array if parrent
+        - response status(200)
+    2.  routes/post/postsRouter.js
+        - like post
+        - method : put('/likes/:id') id => id post
+        - import dan pasang likePost
+    3.  pengujian pada postman:
+        - login dengan user yang terdaftar
+        - get all user untuk mengcopy salah satu id post
+        - request like post
+            PUT {{baseURL}}/posts/likes/<id post>
+        - response akan menampilkan : status :"success"(200)
+          & data post
