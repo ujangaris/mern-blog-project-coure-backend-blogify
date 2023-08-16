@@ -1501,16 +1501,16 @@
         - import dan pasang fileUpload
         - file upload middleware
         - pada create post, tambahkan upload.single("file")
-    4.  controller/posts/postsController.js
+    5.  controller/posts/postsController.js
         - pada create post, tambahkan image
         - nyalakan // console.log(req.file);//ini untuk melihat object dari file image
-    5.  model/Post/Post.js
+    6.  model/Post/Post.js
         pada field image ganti default menjadi {require:true}
         image: {
             type: String,
             required: true,
         },
-    6.  pengujian pada postman:
+    7.  pengujian pada postman:
         - setelah login dengan user yang sudah terverifikasi
         - lakukan create post
         - body -> form-data:
@@ -1546,3 +1546,56 @@
         - jika ingin melihat data file yang tersimpan di cloudinary:
             Media Library -> Folders -> blogify-api
             akan ada file yang baru saja kita upload dengan create post
+
+### Profile image upload
+
+    Todo:
+
+    1.  routes/postsRouter.js
+        - import dan pasang multer
+        - import dan pasang fileUpload
+        - file upload middleware
+        - pada register, tambahkan upload.single("profilePicture")
+    2.  controller/posts/postsController.js
+        - pada register, tambahkan profilePicture
+        - nyalakan // console.log(req.file);//ini untuk melihat object dari file profilePicture
+    3.  pengujian pada postman:
+        - lakukan register
+        - body -> form-data:
+        key :           type:    value:
+        profilePicture  File     dummy-avatar.png
+        username        Text     someone
+        email           Text     some@gmail.com
+        password        Text     12345
+        - send request akan menmpilkan data post beserta profilePicture yang sudah terdapat link dari cloudinary
+            {
+                "status": "success",
+                "message": "User Registered Successfully",
+                "newUser": {
+                    "username": "Randi",
+                    "email": "randi@gmail.com",
+                    "role": "user",
+                    "password": "$2a$10$YAZLzlBUWZsa9pSa9VfQzuMhBHdzn7luiZr15mjMtfka2Qpfpoc4G",
+                    "lastLogin": "2023-08-16T12:13:35.151Z",
+                    "accountLevel": "bronze",
+                    "profilePicture": "https://res.cloudinary.com/bukakelas/image/upload/v1692188154/blogify-api/cakcunlvwqrbeqsup7kr.png",
+                    "coverImage": "",
+                    "notificationPreferences": {
+                        "email": "true"
+                    },
+                    "profileViewers": [],
+                    "followers": [],
+                    "following": [],
+                    "blockedUsers": [],
+                    "posts": [],
+                    "likedPost": [],
+                    "_id": "64dcbdfa7763e165a84c632a",
+                    "createdAt": "2023-08-16T12:15:54.238Z",
+                    "updatedAt": "2023-08-16T12:15:54.238Z",
+                    "__v": 0,
+                    "id": "64dcbdfa7763e165a84c632a"
+                }
+            }
+        - jika ingin melihat data file yang tersimpan di cloudinary:
+            Media Library -> Folders -> blogify-api
+            akan ada file yang baru saja kita upload saat register
