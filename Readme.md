@@ -1359,3 +1359,32 @@
             - perhatikan penulisan tanggal pada body, jika salah akan error
             - tanggal harus +1 dari hari ini
             - scheduledPublish ini adalah yang menampung req.body
+
+## Bagian 17: Hiding & Shwoing Post
+
+### Hiding Posts From Blocked Users Controller
+
+    Todo :
+    1.  controllers/posts/postsController.js
+        - pada exports.getPosts rubah public jadi private(harus loggin)
+        - find all users who have blocked the logged-in user
+        - Extract the IDs of users whow have blocked the logged-in user
+    2.  routes/post/postsRouter.js
+        - getting all posts
+        - method : get('/', isLoggedIn) , tambahkan isLoggedIn sebelum getPosts
+    3.  pengujian pada postman:
+        - login dengan user yang terdaftar dan sudah terverifikasi user
+        - kemudian dengan user tersebut buat sebuah categori & satu buah post dengan category yang kita buat
+        - register user baru, kemudian copy id user tersebut
+        - request block user
+            PUT {{baseURL}}/users/block/<id yang kita copy dari akun yang baru di register>
+        - jika sudah berhasil di blok, login dengan user yang baru saja di block
+        - coba request get all post
+        - response akan menampilkan array kosong:
+            {
+                "status": "success",
+                "message": "Posts successfully fetched",
+                "posts": []
+            }
+        - ini terjadi karna user tersebut ter-blok oleh user yang membuat post dan hanya ada satu post yang ada pada get all post
+        - dalam kasus ini jika ada satu user lain yang membuat post , maka hanya post tersebut yang dapat dilihat oleh user yang baru register.

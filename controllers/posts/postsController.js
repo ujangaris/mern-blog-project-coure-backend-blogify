@@ -51,10 +51,21 @@ exports.createPost = asyncHandler(async (req, res) => {
 
 // @desc Get all posts
 // @route GET /api/v1/posts
-// @access Public
+// @access Private
 
 exports.getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({}).populate("comments");
+  // ! find all users who have blocked the logged-in user
+  const loggedInUserId = req.userAuth?._id;
+  const usersBlockingLoggedInUser = await User.find({
+    blockedUsers: loggedInUserId,
+  });
+  // console.log(usersBlockingLoggedInUser);
+  // Extract the IDs of users whow have blocked the logged-in user
+  const blockingUserIds = usersBlockingLoggedInUser?.map((user) => user?._id);
+  console.log(blockingUserIds);
+  const posts = await Post.find({
+    author: { $nin: blockingUserIds },
+  });
 
   res.status(200).json({
     status: "success",
@@ -67,7 +78,7 @@ exports.getPosts = asyncHandler(async (req, res) => {
 // @access Public
 
 exports.getPost = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id).populate("comments");
 
   res.status(200).json({
     status: "success",
