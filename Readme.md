@@ -1386,5 +1386,26 @@
                 "message": "Posts successfully fetched",
                 "posts": []
             }
-        - ini terjadi karna user tersebut ter-blok oleh user yang membuat post dan hanya ada satu post yang ada pada get all post
-        - dalam kasus ini jika ada satu user lain yang membuat post , maka hanya post tersebut yang dapat dilihat oleh user yang baru register.
+        - ini terjadi karna user tersebut ter-blok oleh user yang membuat post
+          dan hanya ada satu post yang ada pada get all post
+        - dalam kasus ini jika ada satu user lain yang membuat post ,
+          maka hanya post tersebut yang dapat dilihat oleh user yang baru register.
+
+### Hiding Schedule Posts Controller
+
+    Todo :
+    1.  controllers/posts/postsController.js
+        - pada exports.getPosts
+            - get current time
+            - query:
+              pada query kita membuat kondisi mencari posting yang memenuhi salah satu dari dua kondisi:
+              { scheduledPublished: { $lte: currentTime } }:
+               Posting dengan scheduledPublished yang lebih kecil atau sama dengan waktu saat ini.
+              { scheduledPublished: null }: Posting yang tidak memiliki scheduledPublished (belum dijadwalkan).
+            - kemudian parsing query kedalam posts
+    2.  pengujian pada postman:
+        - login dengan user yang terdaftar dan user yang membuat post
+        - copy id dari post yang mau di schedule kemduian request schedule dengan tanggal mendatang(harus lebih dari hari ini)
+        - coba request get all post
+        - response akan menampilkan data yang tidak terjadwal/null saja
+

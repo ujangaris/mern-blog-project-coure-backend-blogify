@@ -56,16 +56,26 @@ exports.createPost = asyncHandler(async (req, res) => {
 exports.getPosts = asyncHandler(async (req, res) => {
   // ! find all users who have blocked the logged-in user
   const loggedInUserId = req.userAuth?._id;
+  // get current time
+  const currentTime = new Date();
   const usersBlockingLoggedInUser = await User.find({
     blockedUsers: loggedInUserId,
   });
-  // console.log(usersBlockingLoggedInUser);
+
   // Extract the IDs of users whow have blocked the logged-in user
   const blockingUserIds = usersBlockingLoggedInUser?.map((user) => user?._id);
-  console.log(blockingUserIds);
-  const posts = await Post.find({
+
+  // query
+  const query = {
     author: { $nin: blockingUserIds },
-  });
+    $or: [
+      {
+        scheduledPublished: { $lte: currentTime },
+        scheduledPublished: null,
+      },
+    ],
+  };
+  const posts = await Post.find(query);
 
   res.status(200).json({
     status: "success",
