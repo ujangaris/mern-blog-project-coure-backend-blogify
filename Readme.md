@@ -1475,3 +1475,74 @@
         - lakukan request get profile, request akan menampilkan data profile beserta
           data post yang dibuat, followers, following, blockedUsers, & profileViewers
           dalam bentuk array
+
+## Bagian 18: File Upload Controller || Backend
+
+### File upload middleware & create post with image
+
+    Todo:
+    1.  install cloudinary & multer
+        - npm install cloudinary multer multer-storage-cloudinary
+    2.  utils/fileUpload.js
+        -  import dan pasang cloudinary
+        - import dan pasang multer-storage-cloudinary
+        - pasang dotenv
+        - Configure cloudinary
+        - instace of cloudinary storage
+    3.  .env
+        - CLOUDINARY_CLOUD_NAME
+        - CLOUDINARY_API_KEY
+        - CLOUDINARY_API_SECRET
+        - ket: login di https://console.cloudinary.com,
+          kemudian pilih dashboard dan copy data cloud_name ,api_key,api_secret dan paste pada file .env
+          data ini yang nantinya akan dipanggil oleh fileUpload.js
+    4.  routes/postsRouter.js
+        - import dan pasang multer
+        - import dan pasang fileUpload
+        - file upload middleware
+        - pada create post, tambahkan upload.single("file")
+    4.  controller/posts/postsController.js
+        - pada create post, tambahkan image
+        - nyalakan // console.log(req.file);//ini untuk melihat object dari file image
+    5.  model/Post/Post.js
+        pada field image ganti default menjadi {require:true}
+        image: {
+            type: String,
+            required: true,
+        },
+    6.  pengujian pada postman:
+        - setelah login dengan user yang sudah terverifikasi
+        - lakukan create post
+        - body -> form-data:
+        key :           type:    value:
+        file            File     dummy-avatar.png
+        title           Text     Css
+        content         Text     some content
+        categoryId      Text     <diambil dari category id yang dipilih>
+        - send request akan menmpilkan data post beserta image yang sudah terdapat link dari cloudinary
+            {
+                "status": "success",
+                "message": "Post Successfully Created",
+                "post": {
+                    "title": "Css",
+                    "image": "https://res.cloudinary.com/bukakelas/image/upload/v1692186729/blogify-api/nxkabeguswsryws7zpv5.png",
+                    "claps": 0,
+                    "content": "some content",
+                    "author": "64dc80a3c8cd159d796d5e7f",
+                    "shares": 0,
+                    "postViews": 0,
+                    "category": "64dc80d3c8cd159d796d5e85",
+                    "scheduledPublished": null,
+                    "likes": [],
+                    "dislikes": [],
+                    "comments": [],
+                    "_id": "64dcb869ccff95c34000f617",
+                    "createdAt": "2023-08-16T11:52:09.964Z",
+                    "updatedAt": "2023-08-16T11:52:09.964Z",
+                    "__v": 0,
+                    "id": "64dcb869ccff95c34000f617"
+                }
+            }
+        - jika ingin melihat data file yang tersimpan di cloudinary:
+            Media Library -> Folders -> blogify-api
+            akan ada file yang baru saja kita upload dengan create post

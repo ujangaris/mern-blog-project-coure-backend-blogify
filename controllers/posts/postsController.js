@@ -7,6 +7,7 @@ const User = require("../../model/User/User");
 // @access Private
 
 exports.createPost = asyncHandler(async (req, res) => {
+  // console.log(req.file);//ini untuk melihat object dari file image
   // Get the payload
   const { title, content, categoryId } = req.body;
   //   check if post exists
@@ -20,6 +21,7 @@ exports.createPost = asyncHandler(async (req, res) => {
     content,
     category: categoryId,
     author: req?.userAuth?._id,
+    image: req?.file?.path,
   });
   // ! Associate post to user
   await User.findByIdAndUpdate(
