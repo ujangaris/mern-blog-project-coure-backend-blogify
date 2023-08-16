@@ -1409,3 +1409,69 @@
         - coba request get all post
         - response akan menampilkan data yang tidak terjadwal/null saja
 
+### Populating MongoDB IDs
+
+    Todo :
+    1.  model/User/User.js
+        - pada timestamps tambahkan:
+            {
+                timestamps: true,
+                toJSON: {
+                virtuals: true,
+                },
+                toObject: {
+                virtuals: true,
+                },
+            }
+    2.  controllers/posts/postsController.js
+        - pada exports.getPosts
+            - tambahkan populate pada posts
+            /contoh:
+            const posts = await Post.find(query).populate({
+                path: "author",
+                model: "User",
+                select: "email role username",
+            }).populate({
+            path: "category",
+            model: "Category",
+            select: "name",
+            });
+    3.  model/Category/Category.js
+        - pada timestamps tambahkan:
+            {
+                timestamps: true,
+                toJSON: {
+                virtuals: true,
+                },
+                toObject: {
+                virtuals: true,
+                },
+            }
+    4.  pengujian pada postman:
+        - login dengan user yang terdaftar
+        - lakukan request get all posts, request akan menampilkan data post beserta
+          author/pembuat postnya & category namenya akan tampil
+    5.  model/Post/Post.js
+        - pada timestamps tambahkan:
+            {
+                timestamps: true,
+                toJSON: {
+                virtuals: true,
+                },
+                toObject: {
+                virtuals: true,
+                },
+            }
+    6.  controllers/users/usersController.js
+        - pada exports.getProfile
+            - tambahkan populate pada user
+            /contoh:
+            const user = await User.findById(id).populate({
+                path: "posts",
+                model: "Post",
+            })
+    7.  pengujian pada postman:
+        - login dengan user yang terdaftar
+        - lakukan request get profile, request akan menampilkan data profile beserta
+          data post yang dibuat, followers, following, blockedUsers, & profileViewers
+          dalam bentuk array

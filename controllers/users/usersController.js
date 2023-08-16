@@ -77,7 +77,29 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
   // ! get user id from params
   // const id = req.params.id;
   const id = req.userAuth._id;
-  const user = await User.findById(id);
+  const user = await User.findById(id)
+    .populate({
+      path: "posts",
+      model: "Post",
+    })
+    .populate({
+      path: "following",
+      model: "User",
+    })
+    .populate({
+      path: "followers",
+      model: "User",
+    })
+    .populate({
+      path: "blockedUsers",
+      model: "User",
+      select: "username email",
+    })
+    .populate({
+      path: "profileViewers",
+      model: "User",
+      select: "username email",
+    });
   console.log(user);
   res.json({
     status: "success",
