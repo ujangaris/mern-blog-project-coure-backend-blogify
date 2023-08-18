@@ -1,4 +1,5 @@
 const dotenv = require("dotenv");
+const cors = require("cors");
 dotenv.config();
 const http = require("http");
 const express = require("express");
@@ -14,9 +15,10 @@ require("./config/database")();
 
 // !Server
 const app = express();
-
 // middlewares
 app.use(express.json()); //Pass incoming data
+// cors middleware
+app.use(cors());
 
 // Routes
 app.use("/api/v1/users", usersRouter);

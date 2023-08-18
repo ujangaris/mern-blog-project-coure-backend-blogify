@@ -1599,3 +1599,13 @@
         - jika ingin melihat data file yang tersimpan di cloudinary:
             Media Library -> Folders -> blogify-api
             akan ada file yang baru saja kita upload saat register
+
+### Install Cors
+
+    Todo:
+    1.  npm install cors
+    2.  server.js
+        - import dan pasang cors
+        - cors middleware
+    3.  restart server
+        - npm run server
