@@ -1609,3 +1609,15 @@
         - cors middleware
     3.  restart server
         - npm run server
+
+### Modified User Registration API
+
+    Todo:
+    1.  routes/users/usersRouter.js
+        pada usersRouter.post hilangkan , upload.single("profilePicture")
+    2.  controllers/users/usersController.js
+        - pada registrasi new user hapus:
+            profilePicture: req?.file?.path
+    3.  restart server
+        - npm run server
+    4.  noted: ini dilakukan karna pada process registeration user tidak perlu upload image

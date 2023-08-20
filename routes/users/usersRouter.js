@@ -23,7 +23,7 @@ const usersRouter = express.Router();
 const upload = multer({ storage });
 
 // ! Register
-usersRouter.post("/register", upload.single("profilePicture"), register);
+usersRouter.post("/register", register);
 //  Login
 usersRouter.post("/login", login);
 //  Profile
