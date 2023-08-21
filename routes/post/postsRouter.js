@@ -12,6 +12,7 @@ const {
   disLikePost,
   claps,
   schedule,
+  getPublicPosts,
 } = require("../../controllers/posts/postsController");
 const checkAccountVerification = require("../../middlewares/isAccountVerified");
 const storage = require("../../utils/fileUpload");
@@ -30,11 +31,13 @@ postsRouter.post(
 );
 // getting all posts
 postsRouter.get("/", isLoggin, getPosts);
-// getting single post
+// public posts
+postsRouter.get("/public", getPublicPosts);
+//  single post
 postsRouter.get("/:id", getPost);
-// getting update post
+//  update post
 postsRouter.put("/:id", isLoggin, updatePost);
-// getting delete post
+//  delete post
 postsRouter.delete("/:id", isLoggin, deletePost);
 
 // like post

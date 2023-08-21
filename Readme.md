@@ -1621,3 +1621,17 @@
     3.  restart server
         - npm run server
     4.  noted: ini dilakukan karna pada process registeration user tidak perlu upload image
+
+### Get public posts
+
+    Todo:
+    1.  controllers/posts/postsController.js
+        - exports.getPublicPosts
+        - response status(200)
+    2.  routes/posts/postsRouter.js
+        - public posts
+            - import dan pasang getPublicPosts
+    3.  pengujian pada postman
+        restart server
+        - npm run server
+        GET {{baseURL}}/posts/public
