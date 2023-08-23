@@ -1635,3 +1635,13 @@
         restart server
         - npm run server
         GET {{baseURL}}/posts/public
+
+### Populate pada get single post
+
+    Todo:
+    1.  controllers/posts/postsController.js
+        - pada exports.getPost tambahakan pupulate author & category
+    2.  pengujian pada postman
+        restart server
+        - npm run server
+        GET {{baseURL}}/posts/<postId
