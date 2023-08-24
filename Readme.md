@@ -1645,3 +1645,22 @@
         restart server
         - npm run server
         GET {{baseURL}}/posts/<postId
+
+### Prevent user from deleting any post-backend
+
+    Todo:
+    1.  controllers/posts/postsController.js
+        - pada exports.deletePost modifikasai code
+        - find teh post
+        - buat handle jika id user dan id pada post author tidak sama
+    2.  pengujian pada postman
+        restart server
+        - npm run server
+        - login sebagai user yang telah membuat post
+        - kemudian get all posts, dan copy id post
+        - kemudian masuk ke request delete post
+            DELETE {{baseURL}}/posts/<postId>
+        - jika post bukan buatan yang login akan terjdi error
+          "Action denied because, you are not the creator of this post"
+        - jika post benar buatan dari user yang sedang login,
+          maka post akan terhaspus
